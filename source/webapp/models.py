@@ -12,7 +12,7 @@ CATEGORY_CHOICES = [
 
 class Product(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False, verbose_name='Название')
-    description = models.TextField(max_length=2000, verbose_name='Описание')
+    description = models.TextField(max_length=2000, null=True, blank=True, verbose_name='Описание')
     category = models.CharField(max_length=50, null=False, blank=False, default=CATEGORY_CHOICES[0][0],
                                 choices=CATEGORY_CHOICES, verbose_name='Категория')
     remain = models.PositiveIntegerField(verbose_name='Остаток')
