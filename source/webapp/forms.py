@@ -13,4 +13,4 @@ class ProductForm(forms.Form):
 
 class SearchForm(forms.Form):
     pattern = forms.CharField(max_length=100, required=True, label='',widget=forms.TextInput(attrs={
-        'placeholder': 'Введите имя'}))
+        'placeholder': 'Введите название товара'}))

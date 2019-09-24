@@ -1,11 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from webapp.models import Product
-from webapp.forms import ProductForm
+from webapp.forms import ProductForm, SearchForm
 
 
 def index_view(request):
     products = Product.objects.all().exclude(remain=0).order_by('category', 'name')
-    context = {'products': products}
+    search_form = SearchForm()
+    context = {'products': products,
+               'search_form': search_form}
+
     return render(request, 'index.html', context)
 
 
@@ -71,3 +74,10 @@ def product_update_view(request, pk):
             })
 
 
+def product_search_view(request):
+    pattern = request.GET.get('pattern')
+    products = Product.objects.all().filter(name__icontains=pattern).\
+        exclude(remain=0).order_by('category', 'name')
+    search_form = SearchForm()
+    context = {'products': products, 'search_form': search_form}
+    return render(request, 'index.html', context)
