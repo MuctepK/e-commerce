@@ -1,7 +1,6 @@
-
 {% extends 'base.html' %}
 {% block menu %}
-    <li><a href="">Добавить товар</a></li>
+    <li><a href="{% url 'product_create' %}">Добавить товар</a></li>
 {% endblock %}
 {% block content %}
     <h1 class="mt-3">Бобро пожаловать в наш магазин!</h1>
