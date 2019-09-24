@@ -87,5 +87,6 @@ def product_search_view(request):
 def product_by_category_view(request, category):
     products = Product.objects.all().exclude(remain=0).filter(category=category).order_by('name')
     search_form = SearchForm()
-    context = {'products': products, 'search_form': search_form, 'categories': CATEGORY_CHOICES}
-    return render(request, 'index.html', context)
+    choose = [cat[1] for cat in CATEGORY_CHOICES if cat[0]==category]
+    context = {'products': products, 'search_form': search_form, 'category':choose[0]}
+    return render(request, 'product_category.html', context)

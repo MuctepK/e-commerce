@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block menu %}
+    <li><a href="{% url 'product_create' %}">Добавить товар</a></li>
+    <li>
+        <form class="form-inline mr-auto" method="GET" action="{% url 'product_search' %}">
+              <div class="md-form">
+               {{search_form.pattern|add_class:'form-control'}}
+              </div>
+              <button  class="btn btn-primary search-btn" type="submit">Найти</button>
+        </form>
+    </li>
+{% endblock %}
+{% block content %}
+    <h1 class="mt-3">Категория: {{ category }}</h1>
+    {% include 'partial/product_list.html' %}
+{% endblock %}
