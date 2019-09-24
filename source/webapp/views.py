@@ -16,6 +16,15 @@ def product_detail_view(request, pk):
     })
 
 
+def product_delete_view(request, pk):
+    note = get_object_or_404(Product, pk=pk)
+    if request.method == 'GET':
+        return render(request, 'delete.html', context={'note': note})
+    elif request.method == 'POST':
+        note.delete()
+        return redirect('index')
+
+
 def product_create_view(request):
     if request.method == 'GET':
         form = ProductForm()
@@ -60,3 +69,5 @@ def product_update_view(request, pk):
             return render(request, 'update.html', context={
                 'form': form, 'note': product
             })
+
+
