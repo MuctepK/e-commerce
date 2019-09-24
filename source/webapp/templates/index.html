@@ -1,5 +1,8 @@
 
 {% extends 'base.html' %}
+{% block menu %}
+    <li><a href="">Добавить товар</a></li>
+{% endblock %}
 {% block content %}
     <h1 class="mt-3">Бобро пожаловать в наш магазин!</h1>
     <div class="row">
@@ -10,7 +13,7 @@
                         <h2 class="card-text card-link">
                             <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
                         </h2>
-                        <p class="card-text">{{ product.category }}</p>
+                        <p class="card-text">{{ product.get_category_display }}</p>
                         <p class="card-text text-right">{{ product.price }} сом</p>
                     </div>
                 </div>

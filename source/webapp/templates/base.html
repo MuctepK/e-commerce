@@ -11,7 +11,15 @@
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 </head>
 <body>
-{% block menu %}{% endblock %}
+<nav class="navbar">
+   <div class="container">
+       <ul class="menu">
+           <li><a href="{% url 'index' %}">Главная</a></li>
+          {% block menu %}{% endblock %}
+       </ul>
+   </div>
+</nav>
+
 <div class="container">
     {% block content %}
         <li><a href="{% url 'index' %}">Главная</a></li>
