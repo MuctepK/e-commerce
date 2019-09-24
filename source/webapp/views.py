@@ -15,6 +15,7 @@ def product_detail_view(request, pk):
         'product': product
     })
 
+
 def product_create_view(request):
     if request.method == 'GET':
         form = ProductForm()
@@ -32,3 +33,30 @@ def product_create_view(request):
                             remain = form.cleaned_data['remain'],
                             price = form.cleaned_data['price'])
         return redirect('index')
+
+
+def product_update_view(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == 'GET':
+        form = ProductForm(data={'name': product.name,
+                                 'description': product.description,
+                                 'category': product.category,
+                                 'remain': product.remain,
+                                 'price': product.price})
+        return render(request, 'update.html', context={'note': product,
+                                                       'form': form
+                                                       })
+    elif request.method == 'POST':
+        form = ProductForm(data=request.POST)
+        if form.is_valid():
+            product.name = form.cleaned_data['name']
+            product.description = form.cleaned_data['description']
+            product.category = form.cleaned_data['category']
+            product.remain = form.cleaned_data['remain']
+            product.price = form.cleaned_data['price']
+            product.save()
+            return redirect('index')
+        else:
+            return render(request, 'update.html', context={
+                'form': form, 'note': product
+            })
