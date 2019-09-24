@@ -3,6 +3,18 @@
 {% block menu %}
     <li><a href="{% url 'product_create' %}">Добавить товар</a></li>
     <li>
+        <div class="dropdown">
+           <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Категории
+           </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for category in categories %}
+            <a class="dropdown-item" href="{% url 'product_category' category.0 %} ">{{ category.1 }}</a>
+                {% endfor %}
+            </div>
+      </div>
+    </li>
+    <li>
         <form class="form-inline mr-auto" method="GET" action="{% url 'product_search' %}">
               <div class="md-form">
                {{search_form.pattern|add_class:'form-control'}}
@@ -15,7 +27,7 @@
     <h1 class="mt-3">Бобро пожаловать в наш магазин!</h1>
     <div class="row">
         {% for product in products %}
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
+            <div class="mt-5 col-12 col-sm-6">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-text card-link">
@@ -24,8 +36,10 @@
                         </h2>
                         <p class="card-text">{{ product.get_category_display }}</p>
                         <p class="card-text text-right">{{ product.price }} сом</p>
-                        <a href="{% url 'product_update' product.pk %}">Edit</a>
-                        <a href="{% url 'product_delete' product.pk %}">Delete</a>
+                        <div class ="d-flex justify-content-between">
+                            <a class="btn btn-info" href="{% url 'product_update' product.pk %}">Изменить</a>
+                            <a class="btn btn-danger" href="{% url 'product_delete' product.pk %}">Удалить</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,13 +1,11 @@
 body {
     font-family: Arial, sans-serif;
-    margin-top: 60px;
-
+    margin-bottom: 20px;
 }
 
 .navbar {
     display: block;
     background: #6a7dff;
-    position: fixed;
     top: 0;
     right: 0;
     left: 0;
@@ -45,7 +43,7 @@ h1, h2, h3 {
     text-align: center;
 }
 .form-inline{
-    margin-left: auto;
+    margin-left: 50px;
     padding:5px 0;
 
 }

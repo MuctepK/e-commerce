@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from webapp.models import Product
-from webapp.forms import ProductForm, SearchForm
+from webapp.forms import ProductForm, SearchForm,CATEGORY_CHOICES
 
 
 def index_view(request):
     products = Product.objects.all().exclude(remain=0).order_by('category', 'name')
     search_form = SearchForm()
     context = {'products': products,
-               'search_form': search_form}
+               'search_form': search_form,
+               'categories': CATEGORY_CHOICES}
 
     return render(request, 'index.html', context)
 
@@ -79,5 +80,12 @@ def product_search_view(request):
     products = Product.objects.all().filter(name__icontains=pattern).\
         exclude(remain=0).order_by('category', 'name')
     search_form = SearchForm()
-    context = {'products': products, 'search_form': search_form}
+    context = {'products': products, 'search_form': search_form, 'categories':CATEGORY_CHOICES}
+    return render(request, 'index.html', context)
+
+
+def product_by_category_view(request, category):
+    products = Product.objects.all().exclude(remain=0).filter(category=category).order_by('name')
+    search_form = SearchForm()
+    context = {'products': products, 'search_form': search_form, 'categories': CATEGORY_CHOICES}
     return render(request, 'index.html', context)
